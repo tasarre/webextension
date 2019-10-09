@@ -556,7 +556,46 @@ createTanaguruTest({
 	query: 'button:not([role]), input[type="reset"]:not([role]), input[type="submit"]:not([role])',
 	tags: ['buttons']
 });
+createTanaguruTest({
+	lang: 'fr',
+	name: 'Le bouton n\'a pas de nom accessible (Failed - span[role="button"]).',
+	query: '[role="button"]',
+	filter: function (item) {
+		var clonedItem = item.cloneNode(true);
+		var clonedImagesItem = clonedItem.querySelectorAll('img[alt]');
+		for (var i = 0; i < clonedImagesItem.length; i++) {
+			clonedImagesItem[i].parentNode.replaceChild(document.createTextNode(clonedImagesItem[i].getAttribute('alt')), clonedImagesItem[i]);
+		}
+		return clonedItem.textContent.trim().length == 0 && !item.hasAttribute('aria-label') && !item.hasAttribute('aria-labelledby');
+	},
+	expectedNbElements: 0,
+	explanations: { 
+		'failed': "Balise avec bouton de rôle sans nom.",
+	},
+	tags: ['buttons'],
+	ressources: { 'rgaa4': ['11.9.1'] }
+});
+createTanaguruTest({
+	lang: 'fr',
+	name: 'Le bouton n\'a pas de nom accessible (passed - span[type="reset"]).',
+	query: 'input[type="reset"]',
+	filter: function (item) {
+		var clonedItem = item.cloneNode(true);
+		var clonedImagesItem = clonedItem.querySelectorAll('input[type="reset"]');
+		for (var i = 0; i < clonedImagesItem.length; i++) {
+			clonedImagesItem[i].parentNode.replaceChild(document.createTextNode(clonedImagesItem[i].getAttribute('reset')), clonedImagesItem[i]);
+		}
+		return clonedItem.textContent.trim().length == 0 && !item.hasAttribute('aria-label') && !item.hasAttribute('aria-labelledby'); 
+		
+	},
+	expectedNbElements: 1,
+	explanations: { 
+		'passed': "Balise avec bouton de rôle sans nom.",
+	},
 
+	tags: ['buttons'],
+	ressources: { 'act': ['97a4e1'] }
+}) 
 // ------------------------------------------------
 // --- 07 - BOUTONS IMAGES  ----------------------------
 // ------------------------------------------------
@@ -788,6 +827,7 @@ createTanaguruTest({
 	tags: ['a11y', 'forms', 'labels','aria'],
 	ressources: { 'rgaa3': ['7.3.1'] }
 });
+
 
 // ------------------------------------------------
 // --- 10 - ELEMENTS OBLIGATOIRES  ---------------------
@@ -1123,6 +1163,61 @@ createTanaguruTest({
 })
 
 
+// ------------------------------------------------
+// ---- 14 - Aria  -----------------
+// ------------------------------------------------
+
+/* aria-erromessage */
+createTanaguruTest({
+	lang:'fr',
+	name: 'Test aria',
+	query: '[aria-errormessage]',
+	filter: function(item){
+		return item.getAttribute('aria-errormessage').split(" ").length > 1
+	},
+	expectedNbElements: 4,
+	explanations: {
+		'passed': "Propriété aria-errormessage avec une valeur de référence d'ID valide",
+		'failed' : "Propriété aria-errormessage avec une valeur de référence d'ID non valide, car l'espace n'est pas autorisé dans un ID unique"
+	},
+	tags: ['aria'],
+	mark: {attrs: ['aria-errormessage']},
+
+
+})
+/* aria-required */
+createTanaguruTest({
+	lang: 'fr',
+	name: 'test aria-required',
+	query: '[aria-required]',
+	filter: function(item){
+
+		return typeof item.getAttribute('aria-required') == "boolean"
+	},
+	expectedNbElements: 2,
+	explanations: {
+		'passed': 'Propriété aria-required avec une valeur true / false valide',
+		'failed': 'Propriété aria-required avec une valeur true / false non valide'
+	},
+	tags : ['aria'],
+	mark: {attrs: ['aria-required']}
+
+})
+/* aria-owns */
+createTanaguruTest({
+	lang: 'fr',
+	name: 'test area owns',
+	query: '[aria-owns]',
+	filter: function(item){
+		return item.getAttribute('aria-owns').length
+	},
+	expectedNbElements: 0,
+	tags : ['aria'],
+	mark: {attrs: [aria-owns]}
+})
+
+
+
 /*************************************************
  ***** SEO ***************************************
  *************************************************/
@@ -1135,6 +1230,7 @@ createTanaguruTest({
 	explanations: {
 		'passed' : "Cette page contient une balise de métadonnée de description.",
 		'failed' : "Aucune balise de métadonnée de description n'est renseignée, ou plus d'une balise de métadonnée de description est présente sur la page."
+
 	},
 	tags: ['SEO']
 })
