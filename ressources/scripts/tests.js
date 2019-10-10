@@ -1175,13 +1175,13 @@ createTanaguruTest({
 	filter: function(item){
 		return item.getAttribute('aria-errormessage').split(" ").length > 1
 	},
-	expectedNbElements: 4,
+	expectedNbElements: 0,
 	explanations: {
 		'passed': "Propriété aria-errormessage avec une valeur de référence d'ID valide",
 		'failed' : "Propriété aria-errormessage avec une valeur de référence d'ID non valide, car l'espace n'est pas autorisé dans un ID unique"
 	},
 	tags: ['aria'],
-	mark: {attrs: ['aria-errormessage']},
+	ressources: { 'act' : ['6a7281']}
 
 
 })
@@ -1192,30 +1192,36 @@ createTanaguruTest({
 	query: '[aria-required]',
 	filter: function(item){
 
-		return typeof item.getAttribute('aria-required') == "boolean"
+		["false","true"].indexOf(item.getAttribute("aria-required")) > -1
 	},
-	expectedNbElements: 2,
+	expectedNbElements: 0,
 	explanations: {
 		'passed': 'Propriété aria-required avec une valeur true / false valide',
 		'failed': 'Propriété aria-required avec une valeur true / false non valide'
 	},
 	tags : ['aria'],
-	mark: {attrs: ['aria-required']}
+	ressources: { 'act' : ['6a7281']}
 
 })
-/* aria-owns */
-createTanaguruTest({
+
+
+/* aria-owns */ 
+
+/* CODE A MODIFIER */
+
+/* createTanaguruTest({
 	lang: 'fr',
 	name: 'test area owns',
 	query: '[aria-owns]',
 	filter: function(item){
-		return item.getAttribute('aria-owns').length
+		
 	},
 	expectedNbElements: 0,
 	tags : ['aria'],
-	mark: {attrs: [aria-owns]}
-})
+	ressources: { 'act' : ['6a7281']}
 
+})
+ */
 
 
 /*************************************************
