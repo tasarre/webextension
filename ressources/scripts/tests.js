@@ -1180,7 +1180,7 @@ createTanaguruTest({
 		'passed': "Propriété aria-errormessage avec une valeur de référence d'ID valide",
 		'failed' : "Propriété aria-errormessage avec une valeur de référence d'ID non valide, car l'espace n'est pas autorisé dans un ID unique"
 	},
-	tags: ['aria'],
+	tags: ['aria', 'accessibilty', 'a11y'],
 	ressources: { 'act' : ['6a7281']}
 
 
@@ -1199,31 +1199,55 @@ createTanaguruTest({
 		'passed': 'Propriété aria-required avec une valeur true / false valide',
 		'failed': 'Propriété aria-required avec une valeur true / false non valide'
 	},
-	tags : ['aria'],
+	tags : ['aria', 'accessibilty', 'a11y'],
 	ressources: { 'act' : ['6a7281']}
 
 })
 
 
 /* aria-owns */ 
-
-/* CODE A MODIFIER */
-
-/* createTanaguruTest({
+createTanaguruTest({
 	lang: 'fr',
 	name: 'test area owns',
 	query: '[aria-owns]',
 	filter: function(item){
-		
+		return item.hasAttribute('').length > 1
+		 
 	},
 	expectedNbElements: 0,
-	tags : ['aria'],
+	tags : ['aria', 'accessibilty', 'a11y'],
 	ressources: { 'act' : ['6a7281']}
 
 })
- */
 
+/* aria checked */
+createTanaguruTest({
+	lang: 'fr',
+	name: 'test area checked',
+	query: '[aria-checked]',
+	expectedNbElements: 1,
+	tags: ['aria', 'accessibilty', 'a11y'],
+	ressources: {'act' : ['6a7281']}
+})
 
+/* aria controls valide */
+createTanaguruTest({
+	lang: 'fr',
+	name: 'test area controls',
+	query: '[aria-controls][role="scrollbar"]',
+	expectedNbElements: 0,
+	tags: ['aria', 'accessibilty', 'a11y'],
+	ressources: {'act' : ['6a7281']}
+})
+/* aria controls invalide */
+createTanaguruTest({
+	lang: 'fr',
+	name: 'test area controls',
+	query: '[aria-controls]:not([role="scrollbar"])',
+	expectedNbElements: 0,
+	tags: ['aria', 'accessibilty', 'a11y'],
+	ressources: {'act' : ['6a7281']}
+})
 /*************************************************
  ***** SEO ***************************************
  *************************************************/
