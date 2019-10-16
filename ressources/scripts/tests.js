@@ -1217,9 +1217,8 @@ createTanaguruTest({
 
 })
 /* aria controls */
-createTanaguruTest({
-	lang: 'fr'
-})
+
+
 /*************************************************
  ***** SEO ***************************************
  *************************************************/
@@ -1490,5 +1489,3 @@ createTanaguruTest({
 	tags: ['CIE'],
 	ressources: { 'pidila': ['Pi-147'] } 
 })
-
-
