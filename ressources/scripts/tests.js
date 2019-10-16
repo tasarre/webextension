@@ -1173,17 +1173,16 @@ createTanaguruTest({
 	name: 'Test aria',
 	query: '[aria-errormessage]',
 	filter: function(item){
-		return item.getAttribute('aria-errormessage').split(" ").length > 1
+		return item.getAttribute('aria-errormessage').split(" ").length < 1
 	},
 	expectedNbElements: 0,
 	explanations: {
 		'passed': "Propriété aria-errormessage avec une valeur de référence d'ID valide",
 		'failed' : "Propriété aria-errormessage avec une valeur de référence d'ID non valide, car l'espace n'est pas autorisé dans un ID unique"
 	},
-	tags: ['aria', 'accessibilty', 'a11y'],
-	ressources: { 'act' : ['6a7281']}
-
-
+	tags: ['aria'],
+	mark: {attrs:  ['tabindex']},
+	ressources: { 'act': ['6a7281'] }
 })
 /* aria-required */
 createTanaguruTest({
@@ -1192,61 +1191,34 @@ createTanaguruTest({
 	query: '[aria-required]',
 	filter: function(item){
 
-		["false","true"].indexOf(item.getAttribute("aria-required")) > -1
+		return typeof item.getAttribute('aria-required') == "boolean"
 	},
-	expectedNbElements: 0,
+	expectedNbElements: 2,
 	explanations: {
 		'passed': 'Propriété aria-required avec une valeur true / false valide',
 		'failed': 'Propriété aria-required avec une valeur true / false non valide'
 	},
-	tags : ['aria', 'accessibilty', 'a11y'],
-	ressources: { 'act' : ['6a7281']}
+	tags : ['aria'],
+	mark: {attrs:  ['tabindex']}
 
 })
-
-
-/* aria-owns */ 
+/* aria-owns */
 createTanaguruTest({
 	lang: 'fr',
 	name: 'test area owns',
 	query: '[aria-owns]',
 	filter: function(item){
-		return item.hasAttribute('').length > 1
-		 
+		return item.getAttribute('aria-owns').split("").length < 2
 	},
 	expectedNbElements: 0,
-	tags : ['aria', 'accessibilty', 'a11y'],
-	ressources: { 'act' : ['6a7281']}
+	tags : ['aria'],
+	mark: {attrs: ['tabindex']},
+	ressources: { 'act': ['6a7281'] }
 
 })
-
-/* aria checked */
+/* aria controls */
 createTanaguruTest({
-	lang: 'fr',
-	name: 'test area checked',
-	query: '[aria-checked]',
-	expectedNbElements: 1,
-	tags: ['aria', 'accessibilty', 'a11y'],
-	ressources: {'act' : ['6a7281']}
-})
-
-/* aria controls valide */
-createTanaguruTest({
-	lang: 'fr',
-	name: 'test area controls',
-	query: '[aria-controls][role="scrollbar"]',
-	expectedNbElements: 0,
-	tags: ['aria', 'accessibilty', 'a11y'],
-	ressources: {'act' : ['6a7281']}
-})
-/* aria controls invalide */
-createTanaguruTest({
-	lang: 'fr',
-	name: 'test area controls',
-	query: '[aria-controls]:not([role="scrollbar"])',
-	expectedNbElements: 0,
-	tags: ['aria', 'accessibilty', 'a11y'],
-	ressources: {'act' : ['6a7281']}
+	lang: 'fr'
 })
 /*************************************************
  ***** SEO ***************************************
@@ -1518,4 +1490,5 @@ createTanaguruTest({
 	tags: ['CIE'],
 	ressources: { 'pidila': ['Pi-147'] } 
 })
+
 
